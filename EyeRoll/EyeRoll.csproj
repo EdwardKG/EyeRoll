@@ -46,6 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Figures\PathEight.cs" />
+    <Compile Include="Classes\Figures\PathEllipse.cs" />
+    <Compile Include="Classes\Figures\PathInfinity.cs" />
+    <Compile Include="Classes\Figures\PathSawtooth.cs" />
+    <Compile Include="Classes\Figures\PathSin.cs" />
+    <Compile Include="Classes\Figures\PathSquare.cs" />
+    <Compile Include="Classes\Figures\PathTriangle.cs" />
+    <Compile Include="Classes\Path.cs" />
+    <Compile Include="Classes\Figures\PathCircle.cs" />
+    <Compile Include="Classes\PathTypes.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
