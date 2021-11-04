@@ -276,44 +276,12 @@ namespace EyeRoll
             Ball.Location = new Point(x, y);
         } // not working
 
+        private void ForegroundColorButtonClick(object sender, EventArgs e) => Ball.BackColor = (sender as Button).BackColor;
 
-
-        private void VisibleButton_Click(object sender, EventArgs e)
+        private void BackgroundColorButtonClick(object sender, EventArgs e)
         {
-            Tools.Visible = !Tools.Visible;
-        }
-
-        private void RedButton_Click(object sender, EventArgs e)
-        {
-            Ball.BackColor = RedButton.BackColor;
-        }
-
-        private void BlueButton_Click(object sender, EventArgs e)
-        {
-            Ball.BackColor = BlueButton.BackColor;
-        }
-
-        private void GreenButton_Click(object sender, EventArgs e)
-        {
-            Ball.BackColor = GreenButton.BackColor;
-        }
-
-        private void BackColor1_Click(object sender, EventArgs e)
-        {
-            BackColor = BackColor1.BackColor;
-            Tools.BackColor = BackColor1.BackColor;
-        }
-
-        private void BackColor2_Click(object sender, EventArgs e)
-        {
-            BackColor = BackColor2.BackColor;
-            Tools.BackColor = BackColor2.BackColor;
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            BackColor = button4.BackColor;
-            Tools.BackColor = button4.BackColor;
+            BackColor = (sender as Button).BackColor;
+            Tools.BackColor = (sender as Button).BackColor;
         }
 
         private void Start_Click(object sender, EventArgs e)
@@ -354,5 +322,6 @@ namespace EyeRoll
         {
 
         }
+        private void VisibleButton_Click(object sender, EventArgs e) => Tools.Visible = !Tools.Visible;
     }
 }

@@ -312,7 +312,7 @@ namespace EyeRoll
             this.BackColor1.Size = new System.Drawing.Size(27, 25);
             this.BackColor1.TabIndex = 5;
             this.BackColor1.UseVisualStyleBackColor = false;
-            this.BackColor1.Click += new System.EventHandler(this.BackColor1_Click);
+            this.BackColor1.Click += new System.EventHandler(this.BackgroundColorButtonClick);
             // 
             // BackColor2
             // 
@@ -325,7 +325,7 @@ namespace EyeRoll
             this.BackColor2.Size = new System.Drawing.Size(27, 25);
             this.BackColor2.TabIndex = 4;
             this.BackColor2.UseVisualStyleBackColor = false;
-            this.BackColor2.Click += new System.EventHandler(this.BackColor2_Click);
+            this.BackColor2.Click += new System.EventHandler(this.BackgroundColorButtonClick);
             // 
             // button4
             // 
@@ -338,7 +338,7 @@ namespace EyeRoll
             this.button4.Size = new System.Drawing.Size(27, 25);
             this.button4.TabIndex = 3;
             this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Click += new System.EventHandler(this.BackgroundColorButtonClick);
             // 
             // RedButton
             // 
@@ -351,7 +351,7 @@ namespace EyeRoll
             this.RedButton.Size = new System.Drawing.Size(27, 25);
             this.RedButton.TabIndex = 2;
             this.RedButton.UseVisualStyleBackColor = false;
-            this.RedButton.Click += new System.EventHandler(this.RedButton_Click);
+            this.RedButton.Click += new System.EventHandler(this.ForegroundColorButtonClick);
             // 
             // BlueButton
             // 
@@ -364,7 +364,7 @@ namespace EyeRoll
             this.BlueButton.Size = new System.Drawing.Size(27, 25);
             this.BlueButton.TabIndex = 1;
             this.BlueButton.UseVisualStyleBackColor = false;
-            this.BlueButton.Click += new System.EventHandler(this.BlueButton_Click);
+            this.BlueButton.Click += new System.EventHandler(this.ForegroundColorButtonClick);
             // 
             // GreenButton
             // 
@@ -377,7 +377,7 @@ namespace EyeRoll
             this.GreenButton.Size = new System.Drawing.Size(27, 25);
             this.GreenButton.TabIndex = 0;
             this.GreenButton.UseVisualStyleBackColor = false;
-            this.GreenButton.Click += new System.EventHandler(this.GreenButton_Click);
+            this.GreenButton.Click += new System.EventHandler(this.ForegroundColorButtonClick);
             // 
             // Ball
             // 
