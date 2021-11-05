@@ -39,7 +39,7 @@ namespace EyeRoll
             this.StopButton = new System.Windows.Forms.Button();
             this.Start = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.UserTimer = new System.Windows.Forms.DomainUpDown();
+            this.UserUpDownTimer = new System.Windows.Forms.DomainUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.Size = new System.Windows.Forms.DomainUpDown();
@@ -54,7 +54,7 @@ namespace EyeRoll
             this.BlueButton = new System.Windows.Forms.Button();
             this.GreenButton = new System.Windows.Forms.Button();
             this.Ball = new System.Windows.Forms.PictureBox();
-            this.DrawTimer = new System.Windows.Forms.Timer(this.components);
+            this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.Timer = new System.Windows.Forms.Label();
             this.SecTimer = new System.Windows.Forms.Timer(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -90,7 +90,7 @@ namespace EyeRoll
             this.Tools.Controls.Add(this.StopButton);
             this.Tools.Controls.Add(this.Start);
             this.Tools.Controls.Add(this.label5);
-            this.Tools.Controls.Add(this.UserTimer);
+            this.Tools.Controls.Add(this.UserUpDownTimer);
             this.Tools.Controls.Add(this.label4);
             this.Tools.Controls.Add(this.label3);
             this.Tools.Controls.Add(this.Size);
@@ -185,26 +185,26 @@ namespace EyeRoll
             // 
             // UserTimer
             // 
-            this.UserTimer.Items.Add("15");
-            this.UserTimer.Items.Add("14");
-            this.UserTimer.Items.Add("13");
-            this.UserTimer.Items.Add("12");
-            this.UserTimer.Items.Add("11");
-            this.UserTimer.Items.Add("10");
-            this.UserTimer.Items.Add("9");
-            this.UserTimer.Items.Add("8");
-            this.UserTimer.Items.Add("7");
-            this.UserTimer.Items.Add("6");
-            this.UserTimer.Items.Add("5");
-            this.UserTimer.Items.Add("4");
-            this.UserTimer.Items.Add("3");
-            this.UserTimer.Items.Add("2");
-            this.UserTimer.Items.Add("1");
-            this.UserTimer.Location = new System.Drawing.Point(140, 132);
-            this.UserTimer.Name = "UserTimer";
-            this.UserTimer.Size = new System.Drawing.Size(57, 20);
-            this.UserTimer.TabIndex = 13;
-            this.UserTimer.Text = "1";
+            this.UserUpDownTimer.Items.Add("15");
+            this.UserUpDownTimer.Items.Add("14");
+            this.UserUpDownTimer.Items.Add("13");
+            this.UserUpDownTimer.Items.Add("12");
+            this.UserUpDownTimer.Items.Add("11");
+            this.UserUpDownTimer.Items.Add("10");
+            this.UserUpDownTimer.Items.Add("9");
+            this.UserUpDownTimer.Items.Add("8");
+            this.UserUpDownTimer.Items.Add("7");
+            this.UserUpDownTimer.Items.Add("6");
+            this.UserUpDownTimer.Items.Add("5");
+            this.UserUpDownTimer.Items.Add("4");
+            this.UserUpDownTimer.Items.Add("3");
+            this.UserUpDownTimer.Items.Add("2");
+            this.UserUpDownTimer.Items.Add("1");
+            this.UserUpDownTimer.Location = new System.Drawing.Point(140, 132);
+            this.UserUpDownTimer.Name = "UserTimer";
+            this.UserUpDownTimer.Size = new System.Drawing.Size(57, 20);
+            this.UserUpDownTimer.TabIndex = 13;
+            this.UserUpDownTimer.Text = "1";
             // 
             // label4
             // 
@@ -358,8 +358,8 @@ namespace EyeRoll
             // 
             // DrawTimer
             // 
-            this.DrawTimer.Interval = 20;
-            this.DrawTimer.Tick += new System.EventHandler(this.UpdateTimer_Tick);
+            this.UpdateTimer.Interval = 20;
+            this.UpdateTimer.Tick += new System.EventHandler(this.UpdateTimer_Tick);
             // 
             // Timer
             // 
@@ -442,7 +442,7 @@ namespace EyeRoll
         private System.Windows.Forms.Button BlueButton;
         private System.Windows.Forms.Button GreenButton;
         private System.Windows.Forms.PictureBox Ball;
-        private System.Windows.Forms.Timer DrawTimer;
+        private System.Windows.Forms.Timer UpdateTimer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox Movement;
@@ -450,7 +450,7 @@ namespace EyeRoll
         private System.Windows.Forms.DomainUpDown Speed;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DomainUpDown UserTimer;
+        private System.Windows.Forms.DomainUpDown UserUpDownTimer;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button Start;
         private System.Windows.Forms.Button StopButton;

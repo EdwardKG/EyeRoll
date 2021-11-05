@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EyeRoll.Classes.Fields_Inherit;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -7,29 +8,25 @@ using System.Threading.Tasks;
 
 namespace EyeRoll.Classes.Figures
 {
-    class PathSawtooth : Path
+    class PathSawtooth : Path, IDirectionPath
     {
-        private string direction { get; set; }
-        private float angle = 0;
-        private float smoothing = 0.05f;
+        public string Direction { get; set; }
+        private int velY = 0, velX = 0, dir = 1;
 
-        public PathSawtooth(Point init_position) : base(init_position)
-        {
-            this.direction = direction;
-        }
+        public PathSawtooth(Point init_position) : base(init_position) { }
 
         public override void Drop()
         {
-            angle = 0;
-            vel = 0;
-
+            velX = 0;
+            velY = 0;
+            dir = 1;
         }
 
         public override Point Update(int speed)
         {
             int VS = 300;
 
-            if (direction == "Horizontal")
+            if (Direction == "Horizontal")
             {
                 velX += 4 * speed;
                 velY += 4 * dir * speed;
@@ -47,7 +44,6 @@ namespace EyeRoll.Classes.Figures
             }
             else
             {
-
                 VS = 100;
 
                 velX += 4 * speed;
@@ -64,5 +60,6 @@ namespace EyeRoll.Classes.Figures
                 }
                 return new Point(y, velX);
             }
+        }
     }
 }

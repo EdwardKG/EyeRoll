@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Fields Inherit\IDirectionPath.cs" />
+    <Compile Include="Classes\Fields Inherit\ISmoothingPath.cs" />
     <Compile Include="Classes\Figures\PathEight.cs" />
     <Compile Include="Classes\Figures\PathEllipse.cs" />
     <Compile Include="Classes\Figures\PathInfinity.cs" />

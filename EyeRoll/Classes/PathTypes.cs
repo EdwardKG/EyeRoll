@@ -15,6 +15,7 @@ namespace EyeRoll.Classes
         Sin,
         Ellipse,
         Triangle,
-        Square
+        Square,
+        Random
     }
 }

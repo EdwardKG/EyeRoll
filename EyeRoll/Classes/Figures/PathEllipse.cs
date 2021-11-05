@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EyeRoll.Classes.Fields_Inherit;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -7,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace EyeRoll.Classes.Figures
 {
-    class PathEllipse : Path
+    class PathEllipse : Path, ISmoothingPath
     {
         private float angle = 0;
-        private float smoothing = 0.05f;
+        public float Smoothing { get; set; }
 
         public PathEllipse(Point init_position) : base(init_position) { }
 
@@ -26,7 +27,7 @@ namespace EyeRoll.Classes.Figures
             int x = (int)(HS * Math.Cos(angle) + init_position.X);
             int y = (int)(VS * Math.Sin(angle) + init_position.Y);
 
-            angle += smoothing * speed;
+            angle += Smoothing * speed;
             return new Point(x, y);
         }
     }

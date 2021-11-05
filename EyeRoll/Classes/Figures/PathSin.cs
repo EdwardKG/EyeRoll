@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EyeRoll.Classes.Fields_Inherit;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -7,16 +8,14 @@ using System.Threading.Tasks;
 
 namespace EyeRoll.Classes.Figures
 {
-    class PathSin : Path
+    class PathSin : Path, IDirectionPath
     {
-        private string direction { get; set; }
+        public string Direction { get; set; }
         private float angle = 0;
         private int vel = 0;
 
-        public PathSin(Point init_position, string direction) : base(init_position) 
-        {
-            this.direction = direction;
-        }
+        public PathSin(Point init_position) : base(init_position) { }
+
 
         public override void Drop()
         {
@@ -32,7 +31,7 @@ namespace EyeRoll.Classes.Figures
             int val = (int)(VS * Math.Sin(angle) + init_position.Y);
             angle += 0.1f * speed;
 
-            if (direction == "Horizontal")
+            if (Direction == "Horizontal")
             {
                 if (vel > init_position.X * 2) vel = 0;
                 return new Point(vel, val);

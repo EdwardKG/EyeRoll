@@ -1,19 +1,19 @@
 ﻿using EyeRoll.Classes;
+using EyeRoll.Classes.Fields_Inherit;
 using EyeRoll.Classes.Figures;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
-using static System.Windows.Forms.ComboBox;
+using static EyeRoll.Classes.PathTypes;
 
 namespace EyeRoll
 {
     public partial class MainWindow : Form
     {
-        readonly Random rnd = new Random();
-        int Time = 0;
-        Path pathFigure;
+        private int simulationTime = 0;
+        private Path PathFigure;
 
         // init
 
@@ -21,224 +21,126 @@ namespace EyeRoll
         private void MainWindow_Load(object sender, EventArgs e)
         {
             Enum.GetValues(typeof(PathTypes)).Cast<PathTypes>().ToList().ForEach(x => Movement.Items.Add(x));
+            Movement.SelectedIndexChanged += (s, args) => InitPath();
+            Movement.SelectedItem = PathTypes.Random;
             DrawCirclePen();
         }
 
-        // simulation & drawing
+        // simulation
 
         private void StartSimulation()
         {
-            DrawTimer.Enabled = true;
+            PathFigure.Drop();
+            UpdateTimer.Enabled = true;
             SecTimer.Enabled = true;
             DrawCirclePen();
-            UserTimer.Enabled = false;
+            UserUpDownTimer.Enabled = false;
         }
         private void StopSimulation()
         {
-            DrawTimer.Enabled = false;
+            UpdateTimer.Enabled = false;
             SecTimer.Enabled = false;
-            Time = 0;
-            UserTimer.Enabled = true;
+            simulationTime = 0;
+            UserUpDownTimer.Enabled = true;
         }
 
-        Color CurrentColor = Color.FromArgb(204, 0, 0); 
-        private void DrawCirclePen()
+        readonly Random rnd = new Random();
+        private void InitPath()
         {
-            if (string.IsNullOrEmpty(Size.Text)) return;
-            int size = Convert.ToInt32(Size.Text);
-            if (size <= 0 || size > 3) return;
-
-            GraphicsPath path = new GraphicsPath();
-            path.AddEllipse(0, 0, 5 * size, 5 * size);
-            Region rgn = new Region(path);
-            Ball.Region = rgn;
-            Ball.BackColor = CurrentColor;
+            var center = new Point(pictureBox1.Width / 2, pictureBox1.Height / 2);
+            switch (Movement.SelectedItem as PathTypes?)
+            {
+                case Eight:
+                    PathFigure = new PathEight(center);
+                    break;
+                case Circle:
+                    PathFigure = new PathCircle(center);
+                    break;
+                case Infinity:
+                    PathFigure = new PathInfinity(center);
+                    break;
+                case Sawtooth:
+                    PathFigure = new PathSawtooth(center);
+                    break;
+                case Sin:
+                    PathFigure = new PathSin(center);
+                    break;
+                case Ellipse:
+                    PathFigure = new PathEllipse(center);
+                    break;
+                case Triangle:
+                    PathFigure = new PathTriangle(center);
+                    break;
+                case Square:
+                    PathFigure = new PathSquare(center);
+                    break;
+                case PathTypes.Random:
+                default:
+                    Movement.SelectedItem = Movement.Items[rnd.Next(0, Movement.Items.Count - 1)];
+                    InitPath();
+                    return;
+            }
+            Direction.Enabled = PathFigure is IDirectionPath;
+            MoveType.Enabled = PathFigure is ISmoothingPath;
         }
 
         // timers tick
 
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
-            
-            Ball.Size = new Size(5 * Convert.ToInt32(Size.Text), 5 * Convert.ToInt32(Size.Text));
-
-
-            switch (MoveType.Text)
+            if (PathFigure is ISmoothingPath path)
             {
-                case "smooth":
-                    Smoothing = 0.05f;
-                    break;
-                case "step":
-                    Smoothing = 1;
-                    break;
+                switch (MoveType.Text)
+                {
+                    case "smooth":
+                        path.Smoothing = 0.05f;
+                        break;
+                    case "step":
+                        path.Smoothing = 1;
+                        break;
+                }
+            }
+            if (PathFigure is IDirectionPath path_)
+            {
+                path_.Direction = Direction.Text;
             }
 
-            var center = new Point(pictureBox1.Width / 2, pictureBox1.Height / 2);
-            switch (Movement.Text)
-            {
-                case "Eight":
-                    pathFigure = new PathEight(center);
-                    break;
-                case "Circle":
-                    pathFigure = new PathCircle(center);
-                    break;
-                case "Infinity":
-                    pathFigure = new PathInfinity(center);
-                    break;
-                case "Sawtooth":
-                    pathFigure = new PathSawtooth(center);
-                    break;
-                case "Sin":
-                    pathFigure = new PathSin(center);
-                    break;
-                case "Ellipse":
-                    pathFigure = new PathEllipse(center);
-                    break;
-                case "Triangle":
-                    pathFigure = new PathTriangle(center);
-                    break;
-                case "Square":
-                    pathFigure = new PathSquare(center);
-                    break;
-                case "Random":
-                    string[] states = new string[] { "Eight", "Circle", "Infinity", "Sawtooth", "Sin", "Ellipse", "Triangle", "Square" };                      
-                    Movement.Text = states[rnd.Next(states.Length - 1)];
-                    break;
-            }
+            if (!int.TryParse(Speed.Text, out int speed)) speed = 1;
+            else if (speed < 1) speed = 1;
+            else if (speed > 3) speed = 3;
+            Speed.Text = speed.ToString();
+
+            Ball.Location = PathFigure.Update(speed);
         }
         private void SecTimer_Tick(object sender, EventArgs e)
         {
-            Timer.Text = "Time: " + (++Time).ToString();
-            if (Time >= int.Parse(UserTimer.Text) * 60) StopSimulation();
+            Timer.Text = "Time: " + (++simulationTime).ToString();
+            if (simulationTime >= int.Parse(UserUpDownTimer.Text) * 60) StopSimulation();
         }
 
-        // traectory methods
-        private float angle = 0;
-        private int velY = 0;
-        private int velX = 0;
-        private int dir = 1;
-        private float Smoothing = 0.05f;
-        private void Sawtooth()
+        // render
+
+        readonly Color CurrentColor = Color.FromArgb(204, 0, 0); 
+        private void DrawCirclePen()
         {
-            int VS = 300;
-
-            if (Direction.Text == "Horizontal")
+            if (!int.TryParse(Size.Text, out int size))
             {
-                velX += 4 * Convert.ToInt32(Speed.Text);
-                velY += 4 * dir * Convert.ToInt32(Speed.Text);
-                int y = velY + pictureBox1.Height / 2;
-
-                if (Math.Abs(velY) > VS)
-                {
-                    dir = -dir;
-                }
-                if (velX > pictureBox1.Width)
-                {
-                    velX = 0;
-                }
-                Ball.Location = new Point(velX, y);
+                Size.Text = (Ball.Size.Height / 5).ToString();
+                return;
             }
-            else
+            if (size <= 0 || size > 3)
             {
-
-                VS = 100;
-
-                velX += 4 * Convert.ToInt32(Speed.Text);
-                velY += 4 * dir * Convert.ToInt32(Speed.Text);
-                int y = velY + pictureBox1.Width / 2;
-
-                if (Math.Abs(velY) > VS)
-                {
-                    dir = -dir;
-                }
-                if (velX > pictureBox1.Height)
-                {
-                    velX = 0;
-                }
-                Ball.Location = new Point(y, velX);
+                Size.Text = (Ball.Size.Height / 5).ToString();
+                return;
             }
 
-            
+            GraphicsPath path = new GraphicsPath();
+            path.AddEllipse(0, 0, 5 * size, 5 * size);
+            Region rgn = new Region(path);
+            Ball.Region = rgn;
+            Ball.BackColor = CurrentColor;
+            Ball.Size = new Size(size * 5, size * 5);
         }
-
-
-        private int TrIndex = 0;
-        private int TrTimer = 0;
-        private void Triangle()
-        {
-            Speed.Text = "1";
-            TrTimer++;
-
-            if (TrIndex == 0)
-            {
-
-                velX += 4 * Convert.ToInt32(Speed.Text);
-                velY += 4 * Convert.ToInt32(Speed.Text);
-
-            }
-            else if (TrIndex == 1)
-            {
-                velX += 4 * Convert.ToInt32(Speed.Text);
-                velY -= 4 * Convert.ToInt32(Speed.Text);
-            }
-            else if (TrIndex == 2)
-            {
-                velX -=  4 * Convert.ToInt32(Speed.Text); 
-            }
-
-            if (TrTimer > 200 && TrIndex == 2)
-            {
-                TrIndex = 0;
-                TrTimer = 0;
-            }
-            else if (TrTimer > 100 && TrIndex != 2)
-            {
-                TrIndex++;
-                TrTimer = 0;
-            }
-
-            int x = velX + pictureBox1.Width / 2 - 400;
-            int y = velY + pictureBox1.Height / 2 - 200;
-
-            Ball.Location = new Point(x, y);
-        }
-
-        private int SqTimer = 0;
-        private int SqIndex = 0; 
-        private void Square()
-        {
-
-            Speed.Text = "1";
-
-            SqTimer++;
-            switch (SqIndex)
-            {
-                case 0:
-                    velX += 4 * Convert.ToInt32(Speed.Text);
-                    break;
-                case 1:
-                    velY += 4 * Convert.ToInt32(Speed.Text);
-                    break;
-                case 2:
-                    velX -= 4 * Convert.ToInt32(Speed.Text);
-                    break;
-                case 3:
-                    velY -= 4 * Convert.ToInt32(Speed.Text);
-                    break;
-            }
-
-            if (SqTimer > 100)
-            {
-                SqTimer = 0;
-                SqIndex = (SqIndex + 1) % 4;
-            }
-
-            int x = velX + pictureBox1.Width / 2 - 200;
-            int y = velY + pictureBox1.Height / 2 - 200;
-
-
-            Ball.Location = new Point(x, y);
-        } 
 
         // click events & design
 
@@ -253,5 +155,6 @@ namespace EyeRoll
             BackColor = (sender as Button).BackColor;
             Tools.BackColor = (sender as Button).BackColor;
         }
+
     }
 }
