@@ -183,7 +183,7 @@ namespace EyeRoll
             this.label5.TabIndex = 14;
             this.label5.Text = "Timer, min";
             // 
-            // UserTimer
+            // UserUpDownTimer
             // 
             this.UserUpDownTimer.Items.Add("15");
             this.UserUpDownTimer.Items.Add("14");
@@ -201,7 +201,7 @@ namespace EyeRoll
             this.UserUpDownTimer.Items.Add("2");
             this.UserUpDownTimer.Items.Add("1");
             this.UserUpDownTimer.Location = new System.Drawing.Point(140, 132);
-            this.UserUpDownTimer.Name = "UserTimer";
+            this.UserUpDownTimer.Name = "UserUpDownTimer";
             this.UserUpDownTimer.Size = new System.Drawing.Size(57, 20);
             this.UserUpDownTimer.TabIndex = 13;
             this.UserUpDownTimer.Text = "1";
@@ -226,6 +226,13 @@ namespace EyeRoll
             // 
             // Size
             // 
+            this.Size.Items.Add("10");
+            this.Size.Items.Add("9");
+            this.Size.Items.Add("8");
+            this.Size.Items.Add("7");
+            this.Size.Items.Add("6");
+            this.Size.Items.Add("5");
+            this.Size.Items.Add("4");
             this.Size.Items.Add("3");
             this.Size.Items.Add("2");
             this.Size.Items.Add("1");
@@ -356,7 +363,7 @@ namespace EyeRoll
             this.Ball.TabIndex = 2;
             this.Ball.TabStop = false;
             // 
-            // DrawTimer
+            // UpdateTimer
             // 
             this.UpdateTimer.Interval = 20;
             this.UpdateTimer.Tick += new System.EventHandler(this.UpdateTimer_Tick);

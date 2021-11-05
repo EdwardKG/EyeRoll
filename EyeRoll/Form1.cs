@@ -128,7 +128,7 @@ namespace EyeRoll
                 Size.Text = (Ball.Size.Height / 5).ToString();
                 return;
             }
-            if (size <= 0 || size > 3)
+            if (size <= 0 || size > 10)
             {
                 Size.Text = (Ball.Size.Height / 5).ToString();
                 return;
