@@ -23,6 +23,7 @@ namespace EyeRoll
             Enum.GetValues(typeof(PathTypes)).Cast<PathTypes>().ToList().ForEach(x => Movement.Items.Add(x));
             Movement.SelectedIndexChanged += (s, args) => InitPath();
             Movement.SelectedItem = PathTypes.Random;
+            WidthTextBox.TextChanged += (s, args) => {  };
             DrawCirclePen();
         }
 

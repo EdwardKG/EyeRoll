@@ -30,13 +30,13 @@ namespace EyeRoll.Classes.Figures
             {
                 velX += 4 * speed;
                 velY += 4 * dir * speed;
-                int y = velY + init_position.Y / 2;
+                int y = velY + init_position.Y;
 
                 if (Math.Abs(velY) > VS)
                 {
                     dir = -dir;
                 }
-                if (velX > init_position.X)
+                if (velX > init_position.X * 2)
                 {
                     velX = 0;
                 }
@@ -48,13 +48,13 @@ namespace EyeRoll.Classes.Figures
 
                 velX += 4 * speed;
                 velY += 4 * dir * speed;
-                int y = velY + init_position.X / 2;
+                int y = velY + init_position.X;
 
                 if (Math.Abs(velY) > VS)
                 {
                     dir = -dir;
                 }
-                if (velX > init_position.Y)
+                if (velX > init_position.Y * 2)
                 {
                     velX = 0;
                 }
