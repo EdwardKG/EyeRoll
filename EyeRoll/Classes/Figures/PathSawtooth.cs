@@ -13,8 +13,6 @@ namespace EyeRoll.Classes.Figures
         public string Direction { get; set; }
         private int velY = 0, velX = 0, dir = 1;
 
-        public PathSawtooth(Point init_position) : base(init_position) { }
-
         public override void Drop()
         {
             velX = 0;

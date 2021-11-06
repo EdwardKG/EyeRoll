@@ -11,8 +11,6 @@ namespace EyeRoll.Classes.Figures
     {
         private int index = 0, timer = 0, velY = 0, velX = 0;
 
-        public PathTriangle(Point init_position) : base(init_position) { }
-
         public override void Drop()
         {
             index = 0;

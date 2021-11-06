@@ -9,12 +9,7 @@ namespace EyeRoll.Classes
 {
     abstract class Path
     {
-        public Point init_position { get; }
-        protected Path(Point init_position)
-        {
-            this.init_position = init_position;
-        }
-
+        public Point init_position { get; set; }
         public abstract void Drop();
         public abstract Point Update(int speed);
     }

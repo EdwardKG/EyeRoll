@@ -2,6 +2,7 @@
 using EyeRoll.Classes.Fields_Inherit;
 using EyeRoll.Classes.Figures;
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace EyeRoll
     {
         private int simulationTime = 0;
         private Path PathFigure;
+        private string mm_width, mm_height;
 
         // init
 
@@ -23,8 +25,46 @@ namespace EyeRoll
             Enum.GetValues(typeof(PathTypes)).Cast<PathTypes>().ToList().ForEach(x => Movement.Items.Add(x));
             Movement.SelectedIndexChanged += (s, args) => InitPath();
             Movement.SelectedItem = PathTypes.Random;
-            WidthTextBox.TextChanged += (s, args) => {  };
+            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
             DrawCirclePen();
+
+            void changeSize(object s, EventArgs args, int tb)
+            {
+                var mm = (s as TextBox).Text;
+                if (!double.TryParse(mm, out var num))
+                {
+                    switch (tb)
+                    {
+                        case 1:
+                            (s as TextBox).Text = mm_width; 
+                            return;
+
+                        case 2:
+                            (s as TextBox).Text = mm_height; 
+                            return;
+
+                    }
+                }
+
+                var px = (int)Math.Round(num * 96 / 25.4);
+                switch (tb)
+                {
+                    case 1:
+                        pictureBox1.Width = px;
+                        mm_width = mm;
+                        break;
+                    case 2:
+                        pictureBox1.Height = px;
+                        mm_height = mm;
+                        break;
+                }
+                PathFigure.init_position = new Point(pictureBox1.Width / 2, pictureBox1.Height / 2);
+            };
+
+            Width_TextBox.TextChanged += (s, args) => changeSize(s, args, 1);
+            Height_TextBox.TextChanged += (s, args) => changeSize(s, args, 2);
+            Width_TextBox.Text = "247.65";
+            Height_TextBox.Text = "180.18";
         }
 
         // simulation
@@ -52,28 +92,28 @@ namespace EyeRoll
             switch (Movement.SelectedItem as PathTypes?)
             {
                 case Eight:
-                    PathFigure = new PathEight(center);
+                    PathFigure = new PathEight();
                     break;
                 case Circle:
-                    PathFigure = new PathCircle(center);
+                    PathFigure = new PathCircle();
                     break;
                 case Infinity:
-                    PathFigure = new PathInfinity(center);
+                    PathFigure = new PathInfinity();
                     break;
                 case Sawtooth:
-                    PathFigure = new PathSawtooth(center);
+                    PathFigure = new PathSawtooth();
                     break;
                 case Sin:
-                    PathFigure = new PathSin(center);
+                    PathFigure = new PathSin();
                     break;
                 case Ellipse:
-                    PathFigure = new PathEllipse(center);
+                    PathFigure = new PathEllipse();
                     break;
                 case Triangle:
-                    PathFigure = new PathTriangle(center);
+                    PathFigure = new PathTriangle();
                     break;
                 case Square:
-                    PathFigure = new PathSquare(center);
+                    PathFigure = new PathSquare();
                     break;
                 case PathTypes.Random:
                 default:
@@ -81,6 +121,7 @@ namespace EyeRoll
                     InitPath();
                     return;
             }
+            PathFigure.init_position = center;
             Direction.Enabled = PathFigure is IDirectionPath;
             MoveType.Enabled = PathFigure is ISmoothingPath;
         }

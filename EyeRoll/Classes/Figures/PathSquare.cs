@@ -10,7 +10,6 @@ namespace EyeRoll.Classes.Figures
     class PathSquare : Path
     {
         private int velY = 0, velX = 0, timer = 0, index = 0;
-        public PathSquare(Point init_position) : base(init_position) { }
 
         public override void Drop()
         {

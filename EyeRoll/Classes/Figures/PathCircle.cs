@@ -13,8 +13,6 @@ namespace EyeRoll.Classes.Figures
         private float angle = 0;
         public float Smoothing { get; set; }
 
-        public PathCircle(Point init_position) : base(init_position) { }
-
 
         public override void Drop()
         {

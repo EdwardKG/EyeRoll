@@ -14,8 +14,6 @@ namespace EyeRoll.Classes.Figures
         private float angle = 0;
         private int vel = 0;
 
-        public PathSin(Point init_position) : base(init_position) { }
-
 
         public override void Drop()
         {
