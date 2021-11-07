@@ -21,9 +21,9 @@ namespace EyeRoll.Classes.Figures
 
         public override Point Update(int speed)
         {
-            int HS = 150, VS = 300;
+            int HS = 300, VS = 300;
 
-            int x = (int)(HS * Math.Cos(Math.PI / 2 + angle * 2) + init_position.X);
+            int x = (int)(HS * Math.Cos(angle) + init_position.X);
             int y = (int)(VS * Math.Sin(angle) + init_position.Y);
             angle += Smoothing * speed;
 
