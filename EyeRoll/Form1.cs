@@ -27,6 +27,7 @@ namespace EyeRoll
             Movement.SelectedItem = PathTypes.Random;
             pictureBox1.BorderStyle = BorderStyle.Fixed3D;
             DrawCirclePen();
+            SizeChanged += WhenPictureBoxChanged;
 
             void changeSize(object s, EventArgs args, int tb)
             {
@@ -59,12 +60,26 @@ namespace EyeRoll
                         break;
                 }
                 PathFigure.init_position = new Point(pictureBox1.Width / 2, pictureBox1.Height / 2);
+
+     /*           if (pictureBox1.Width > globalWidth || pictureBox1.Height > globalHeight)
+                {
+                    globalHeight = pictureBox1.Height;
+                    globalWidth = pictureBox1.Width;
+                }
+                else if (pictureBox1.Width <= 1542 || pictureBox1.Height <= 838)
+                {
+                    globalHeight = 838;
+                    globalWidth = 1542;
+                }*/
+
             };
 
+            /*this.Width = globalWidth;
+            this.Height = globalHeight;*/
             Width_TextBox.TextChanged += (s, args) => changeSize(s, args, 1);
             Height_TextBox.TextChanged += (s, args) => changeSize(s, args, 2);
-            Width_TextBox.Text = "247.65";
-            Height_TextBox.Text = "180.18";
+            Width_TextBox.Text = "247";  //440
+            Height_TextBox.Text = "180"; //"220"
         }
 
         // simulation
@@ -192,6 +207,32 @@ namespace EyeRoll
 
         private void VisibleButton_Click(object sender, EventArgs e) => Tools.Visible = !Tools.Visible;
         private void ForegroundColorButtonClick(object sender, EventArgs e) => Ball.BackColor = (sender as Button).BackColor;
+
+        //Todo
+        private void WhenPictureBoxChanged(object sender, EventArgs e)
+        {
+            int globalHeight = this.Height;
+            int globalWidth = this.Width;
+            /*MessageBox.Show($"globalHeight: {globalHeight}, globalWidth: {globalWidth}");*/
+
+            if (pictureBox1.Width > globalWidth || pictureBox1.Height > globalHeight)
+            {
+                globalHeight = pictureBox1.Height;
+                globalWidth = pictureBox1.Width;
+                //xForm.Size = new Size(globalWidth, globalHeight);
+            }
+            else if (pictureBox1.Width <= 1542 || pictureBox1.Height <= 838)
+            {
+                globalHeight = 838;
+                globalWidth = 1542;
+                //xForm.Size = new Size(globalWidth, globalHeight);
+            } else
+            {
+                this.Height = 838;
+                this.Width = 1542;
+            }
+        }
+
         private void BackgroundColorButtonClick(object sender, EventArgs e)
         {
             BackColor = (sender as Button).BackColor;
