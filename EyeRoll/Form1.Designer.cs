@@ -427,6 +427,7 @@ namespace EyeRoll
             // 
             // Ball
             // 
+            this.Ball.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Ball.BackColor = System.Drawing.Color.Black;
             this.Ball.Location = new System.Drawing.Point(439, 261);
             this.Ball.Margin = new System.Windows.Forms.Padding(4);
@@ -459,13 +460,14 @@ namespace EyeRoll
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.Location = new System.Drawing.Point(-1, -1);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(1541, 838);
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.ClientSizeChanged += new System.EventHandler(this.WhenPictureBoxChanged);
             // 
             // MainWindow
             // 
@@ -478,6 +480,7 @@ namespace EyeRoll
             this.Controls.Add(this.Timer);
             this.Controls.Add(this.pictureBox1);
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.Text = "Eye roll";
             this.Load += new System.EventHandler(this.MainWindow_Load);
