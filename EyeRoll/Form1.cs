@@ -25,12 +25,19 @@ namespace EyeRoll
             Enum.GetValues(typeof(PathTypes)).Cast<PathTypes>().ToList().ForEach(x => Movement.Items.Add(x));
             Movement.SelectedIndexChanged += (s, args) => InitPath();
             Movement.SelectedItem = PathTypes.Random;
+
+            Screen screen = Screen.PrimaryScreen;
+            this.ClientSize = new Size(screen.Bounds.Width, screen.Bounds.Height);
+            pictureBox1.Location = new Point((ClientSize.Width / 2) - (pictureBox1.Width / 2), (ClientSize.Height / 2) - (pictureBox1.Height / 2));
+
+
             pictureBox1.BorderStyle = BorderStyle.Fixed3D;
+            //Ball.Location = new Point(pictureBox1.Width / 2, pictureBox1.Height / 2); // not correct location
             DrawCirclePen();
 
             this.TopMost = true;
             this.WindowState = FormWindowState.Maximized;
-            Ball.Location = new Point(pictureBox1.Width / 2, pictureBox1.Height / 2);
+           
 
             void changeSize(object s, EventArgs args, int tb)
             {

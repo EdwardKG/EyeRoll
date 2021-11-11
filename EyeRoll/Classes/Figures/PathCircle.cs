@@ -16,7 +16,7 @@ namespace EyeRoll.Classes.Figures
 
         public override void Drop()
         {
-            angle = 0;
+            angle = -1;
         }
 
         public override Point Update(int speed)

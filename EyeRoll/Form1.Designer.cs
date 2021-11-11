@@ -210,7 +210,7 @@ namespace EyeRoll
             // StopButton
             // 
             this.StopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.StopButton.Location = new System.Drawing.Point(8, 748);
+            this.StopButton.Location = new System.Drawing.Point(7, 706);
             this.StopButton.Margin = new System.Windows.Forms.Padding(4);
             this.StopButton.Name = "StopButton";
             this.StopButton.Size = new System.Drawing.Size(117, 28);
@@ -222,7 +222,7 @@ namespace EyeRoll
             // Start
             // 
             this.Start.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Start.Location = new System.Drawing.Point(155, 748);
+            this.Start.Location = new System.Drawing.Point(155, 706);
             this.Start.Margin = new System.Windows.Forms.Padding(4);
             this.Start.Name = "Start";
             this.Start.Size = new System.Drawing.Size(129, 28);
@@ -427,9 +427,11 @@ namespace EyeRoll
             // 
             // Ball
             // 
-            this.Ball.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.Ball.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Ball.BackColor = System.Drawing.Color.Black;
-            this.Ball.Location = new System.Drawing.Point(439, 261);
+            this.Ball.Location = new System.Drawing.Point(442, 277);
             this.Ball.Margin = new System.Windows.Forms.Padding(4);
             this.Ball.Name = "Ball";
             this.Ball.Size = new System.Drawing.Size(20, 18);
@@ -460,12 +462,12 @@ namespace EyeRoll
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox1.Location = new System.Drawing.Point(-1, -1);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(1541, 838);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
