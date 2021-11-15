@@ -11,14 +11,16 @@ namespace EyeRoll.Classes.Figures
     class PathSin : Path, IDirectionPath
     {
         public string Direction { get; set; }
-        private float angle = 0;
-        private int vel = 0;
+        public int Width { get; set; }
+        public int Height { get; set; }
 
+        private float angle;
+        private int vel;
 
         public override void Drop()
         {
             angle = 0; 
-            vel = 0;
+            vel = Direction == "Horizontal" ? init_position.X : init_position.Y;
         }
 
         public override Point Update(int speed)
@@ -26,17 +28,17 @@ namespace EyeRoll.Classes.Figures
             int VS = 300;
 
             vel += 4 * speed;
-            int val = (int)(VS * Math.Sin(angle) + init_position.Y);
+            int val = (int)(VS * Math.Sin(angle) + (Direction == "Horizontal" ? init_position.Y : init_position.X));
             angle += 0.1f * speed;
 
             if (Direction == "Horizontal")
             {
-                if (vel > init_position.X * 2) vel = 0;
+                if (vel > init_position.X + Width / 2) vel = init_position.X - Width / 2;
                 return new Point(vel, val);
             }
             else
             {
-                if (vel > init_position.Y * 2) vel = 0;
+                if (vel > init_position.Y + Height / 2) vel = init_position.Y - Height / 2;
                 return new Point(val, vel);
             }
         }

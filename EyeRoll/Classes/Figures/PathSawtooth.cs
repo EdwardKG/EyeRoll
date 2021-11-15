@@ -11,18 +11,23 @@ namespace EyeRoll.Classes.Figures
     class PathSawtooth : Path, IDirectionPath
     {
         public string Direction { get; set; }
-        private int velY = 0, velX = 0, dir = 1;
+        public int Width { get; set; }
+        public int Height { get; set; }
+
+        private int velY, velX, dir;
 
         public override void Drop()
         {
             velX = 0;
             velY = 0;
+            if (Direction == "Horizontal") velX = init_position.X;
+            else velY = init_position.Y;
             dir = 1;
         }
 
         public override Point Update(int speed)
         {
-            int VS = 300;
+            int VS = Height / 2;
 
             if (Direction == "Horizontal")
             {
@@ -34,15 +39,15 @@ namespace EyeRoll.Classes.Figures
                 {
                     dir = -dir;
                 }
-                if (velX > init_position.X * 2)
+                if (velX > init_position.X + Width / 2)
                 {
-                    velX = 0;
+                    velX = init_position.X - Width / 2;
                 }
                 return new Point(velX, y);
             }
             else
             {
-                VS = 100;
+                VS = Width / 2;
 
                 velX += 4 * speed;
                 velY += 4 * dir * speed;
@@ -52,9 +57,9 @@ namespace EyeRoll.Classes.Figures
                 {
                     dir = -dir;
                 }
-                if (velX > init_position.Y * 2)
+                if (velX > init_position.Y + Height / 2)
                 {
-                    velX = 0;
+                    velX = init_position.Y - Height / 2;
                 }
                 return new Point(y, velX);
             }

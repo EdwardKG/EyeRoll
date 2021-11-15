@@ -16,6 +16,7 @@ namespace EyeRoll
         private int simulationTime = 0;
         private Path PathFigure;
         private string mm_width, mm_height;
+        Point GetCenter() => new Point(Width / 2 - 10, Height / 2 - 20);
 
         // init
 
@@ -24,58 +25,45 @@ namespace EyeRoll
         {
             Enum.GetValues(typeof(PathTypes)).Cast<PathTypes>().ToList().ForEach(x => Movement.Items.Add(x));
             Movement.SelectedIndexChanged += (s, args) => InitPath();
-            Movement.SelectedItem = PathTypes.Random;
-
-            Screen screen = Screen.PrimaryScreen;
-            this.ClientSize = new Size(screen.Bounds.Width, screen.Bounds.Height);
-            pictureBox1.Location = new Point((ClientSize.Width / 2) - (pictureBox1.Width / 2), (ClientSize.Height / 2) - (pictureBox1.Height / 2));
-
-
-            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
-            //Ball.Location = new Point(pictureBox1.Width / 2, pictureBox1.Height / 2); // not correct location
+                        
+            TopMost = true;
+            WindowState = FormWindowState.Maximized;
             DrawCirclePen();
 
-            this.TopMost = true;
-            this.WindowState = FormWindowState.Maximized;
-           
 
             void changeSize(object s, EventArgs args, int tb)
             {
                 var mm = (s as TextBox).Text;
                 if (!double.TryParse(mm, out var num))
                 {
-
                     switch (tb)
                     {
                         case 1:
-                            (s as TextBox).Text = mm_width; 
+                            (s as TextBox).Text = mm_width;
                             return;
 
                         case 2:
-                            (s as TextBox).Text = mm_height; 
+                            (s as TextBox).Text = mm_height;
                             return;
 
                     }
                 }
 
+                var top_boundary = tb == 1 ? 406 : 211;
+                var bottom_boundary = 50;
 
-                if (tb == 1 && num > 406)
+                if (num > top_boundary)
                 {
-                    num = 406;
-                    (s as TextBox).Text = "406";
+                    num = top_boundary;
+                    (s as TextBox).Text = $"{num}";
                 }
-                else if (tb == 2 && num > 211)
+                else if (num > bottom_boundary)
                 {
-                    num = 211;
-                    (s as TextBox).Text = "211";
-                }
-                else if (num < 50)
-                {
-                    num = 50;
-                    (s as TextBox).Text = "50";
+                    num = bottom_boundary;
+                    (s as TextBox).Text = $"{num}";
                 }
 
-                var px = (int)Math.Round(num * 96 / 25.4);
+                var px = (int)Math.Round(num * 96.0 / 25.4);
                 switch (tb)
                 {
                     case 1:
@@ -87,14 +75,19 @@ namespace EyeRoll
                         mm_height = mm;
                         break;
                 }
-                PathFigure.init_position = new Point(pictureBox1.Width / 2, pictureBox1.Height / 2);
 
+                PathFigure.init_position = GetCenter();
             };
 
-            Width_TextBox.TextChanged += (s, args) => changeSize(s, args, 1);
-            Height_TextBox.TextChanged += (s, args) => changeSize(s, args, 2);
             Width_TextBox.Text = "247";  //406
             Height_TextBox.Text = "180"; //211
+            Width_TextBox.KeyDown += (s, args) => { if (args.KeyCode is Keys.Enter) changeSize(s, args, 1); };
+            Height_TextBox.KeyDown += (s, args) => { if (args.KeyCode is Keys.Enter) changeSize(s, args, 2); };
+
+            pictureBox1.Location = new Point(GetCenter().X - pictureBox1.Width / 2, GetCenter().Y - pictureBox1.Height / 2);
+            Ball.Location = GetCenter();
+
+            Movement.SelectedItem = PathTypes.Random;
         }
 
         // simulation
@@ -118,7 +111,7 @@ namespace EyeRoll
         readonly Random rnd = new Random();
         private void InitPath()
         {
-            var center = new Point(pictureBox1.Width / 2, pictureBox1.Height / 2);
+            var center = GetCenter();
             switch (Movement.SelectedItem as PathTypes?)
             {
                 case Eight:
@@ -154,6 +147,14 @@ namespace EyeRoll
             PathFigure.init_position = center;
             Direction.Enabled = PathFigure is IDirectionPath;
             MoveType.Enabled = PathFigure is ISmoothingPath;
+
+            if (PathFigure is IDirectionPath path_)
+            {
+                path_.Direction = Direction.Text;
+                path_.Width = pictureBox1.Width;
+                path_.Height = pictureBox1.Height;
+            }
+            PathFigure.Drop();
         }
 
         // timers tick
@@ -175,6 +176,8 @@ namespace EyeRoll
             if (PathFigure is IDirectionPath path_)
             {
                 path_.Direction = Direction.Text;
+                path_.Width = pictureBox1.Width;
+                path_.Height = pictureBox1.Height;
             }
 
             if (!int.TryParse(Speed.Text, out int speed)) speed = 1;
