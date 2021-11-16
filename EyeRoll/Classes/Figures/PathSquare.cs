@@ -13,7 +13,7 @@ namespace EyeRoll.Classes.Figures
 
         public override void Drop()
         {
-            index = 0;
+            index = 0; //todo
             timer = 0;
             velY = 0;
             velX = 0;
