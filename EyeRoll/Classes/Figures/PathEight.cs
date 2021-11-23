@@ -1,29 +1,45 @@
 ﻿using EyeRoll.Classes.Fields_Inherit;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EyeRoll.Classes.Figures
 {
-    class PathEight : Path, ISmoothingPath
+    class PathEight : Path, ISmoothingPath, IDirectionPath
     {
         private float angle = 0;
         public float Smoothing { get; set; }
+        public int Height { get; set; }
+        public string Direction { get; set; }
+        public int Width { get; set; }
+        private int velY, velX;
 
         public override void Drop()
         {
             angle = 0;
+            velX = init_position.X;
+            velY = init_position.Y;
         }
 
         public override Point Update(int speed)
         {
-            int HS = 150, VS = 300; // ширина и высота восьмерка
 
-            int x = (int)(HS * Math.Cos(Math.PI / 2 + angle * 2) + init_position.X);
-            int y = (int)(VS * Math.Sin(angle) + init_position.Y);
+            int size = (Height + Width) / 6;
+            int HS = size / 2, VS = size;
+            if (Height / Width > 2)
+            {
+                size /= 3;
+                HS = size / 2;
+                VS = HS * 2;
+            }
+            if (Width / Height > 2)
+            {
+                size /= 3;
+                HS = size / 2;
+                VS = HS / 2;
+            }
+
+            int x = (int)(HS * Math.Cos(Math.PI / 2 + angle * 2) + velX);
+            int y = (int)(VS * Math.Sin(angle) + velY);
 
             angle += Smoothing * speed;
             return new Point(x, y);

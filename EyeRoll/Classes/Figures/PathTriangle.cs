@@ -1,15 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EyeRoll.Classes.Fields_Inherit;
 
 namespace EyeRoll.Classes.Figures
 {
-    class PathTriangle : Path
+
+    class PathTriangle : Path, IDirectionPath
     {
-        private int index = 0, timer = 0, velY = 0, velX = 0;
+        private int index = 0, timer = 0;
+        public string Direction { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
+
+        private int velY, velX;
 
         public override void Drop()
         {
@@ -21,6 +24,13 @@ namespace EyeRoll.Classes.Figures
 
         public override Point Update(int speed)
         {
+            int lengthOfSide = 100;
+            int startX = 400;
+            int startY = 200;
+            int res = 1156 / 681;
+            int coefX = 1156 / Width;
+            int coefY = 681 / Height;
+
             timer += speed;
 
             if (index == 0)
@@ -38,15 +48,53 @@ namespace EyeRoll.Classes.Figures
                 velX -= 4 * speed;
             }
 
-            if (timer > 200 && index == 2) Drop();
-            else if (timer > 100 && index != 2)
+            if (Width / Height < res)
+            {
+                if (Width > Height)
+                {
+                    lengthOfSide /= coefY;
+                    startX /= coefY;
+                    startY /= coefY;
+
+                }
+                else if (Height > Width)
+                {
+                    lengthOfSide /= coefX;
+                    startX /= coefX;
+                    startY /= coefX;
+                }
+
+            }
+
+            //681 1156
+
+            else if (Width / Height > res)
+            {
+                if (Width > Height)
+                {
+                    lengthOfSide *= coefY;
+                    startX *= coefY;
+                    startY *= coefY;
+                }
+                else if (Height > Width)
+                {
+                    lengthOfSide *= coefX;
+                    startX *= coefX;
+                    startY *= coefX;
+                }
+            }
+
+
+            if (timer > lengthOfSide * 2 && index == 2) Drop();
+            else if (timer > lengthOfSide && index != 2)
             {
                 index++;
                 timer = 0;
             }
+            Console.WriteLine(lengthOfSide);
 
-            int x = velX + init_position.X - 400;
-            int y = velY + init_position.Y - 200;
+            int x = velX + init_position.X - startX;
+            int y = velY + init_position.Y - startY;
 
             return new Point(x, y);
         }

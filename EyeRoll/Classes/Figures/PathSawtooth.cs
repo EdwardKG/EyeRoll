@@ -1,10 +1,6 @@
 ﻿using EyeRoll.Classes.Fields_Inherit;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EyeRoll.Classes.Figures
 {
