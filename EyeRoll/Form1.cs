@@ -48,19 +48,19 @@ namespace EyeRoll
                     }
                 }
 
-                /*  var top_boundary = tb == 1 ? 406 : 211;
-                  var bottom_boundary = 50;
+                /* var top_boundary = tb == 1 ? 406 : 211;
+                 var bottom_boundary = 50;
 
-                  if (num > top_boundary)
-                  {
-                      num = top_boundary;
-                      (s as TextBox).Text = $"{num}";
-                  }
-                  else if (num > bottom_boundary)
-                  {
-                      num = bottom_boundary;
-                      (s as TextBox).Text = $"{num}";
-                  }*/
+                if (num > top_boundary)
+                {
+                    num = top_boundary;
+                    (s as TextBox).Text = $"{num}";
+                }
+                else if (num > bottom_boundary)
+                {
+                    num = bottom_boundary;
+                    (s as TextBox).Text = $"{num}";
+                }*/
 
                 var px = (int)Math.Round(num * 96.0 / 25.4);
                 switch (tb)
@@ -84,6 +84,12 @@ namespace EyeRoll
 
             Width_TextBox.Text = "247";  //406
             Height_TextBox.Text = "180"; //211
+/*
+            Width_TextBox.KeyDown += (s, args) => changeSize(s, args, 1); // { if (args.KeyCode is Keys.Enter)..}
+            Height_TextBox.KeyDown += (s, args) => changeSize(s, args, 2); //{ if (args.KeyCode is Keys.Enter) ..}
+
+            pictureBox1.Location = new Point(GetCenter().X - pictureBox1.Width / 2, GetCenter().Y - pictureBox1.Height / 2);
+            Ball.Location = GetCenter();*/
 
             Width_TextBox.KeyDown += (s, args) =>
             {
