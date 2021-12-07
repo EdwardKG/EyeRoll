@@ -15,6 +15,7 @@ namespace EyeRoll
         private int simulationTime = 0;
         private Path PathFigure;
         private string mm_width, mm_height;
+        private decimal delay;
         Point GetCenter() => new Point(Width / 2 - 10, Height / 2 - 20);
 
         // init
@@ -104,7 +105,7 @@ namespace EyeRoll
                 pictureBox1.Location = new Point(GetCenter().X - pictureBox1.Width / 2, GetCenter().Y - pictureBox1.Height / 2);
             };
 
-            Movement.SelectedItem = PathTypes.Random;
+            Movement.SelectedItem = Circle;
         }
 
         // simulation
@@ -129,47 +130,31 @@ namespace EyeRoll
         private void InitPath()
         {
             var center = GetCenter();
-            switch (Movement.SelectedItem as PathTypes?)
-            {
-                case Eight:
-                    PathFigure = new PathEight();
-                    break;
-                case Circle:
-                    PathFigure = new PathCircle();
-                    break;
-                case Infinity:
-                    PathFigure = new PathInfinity();
-                    break;
-                case Sawtooth:
-                    PathFigure = new PathSawtooth();
-                    break;
-                case Sin:
-                    PathFigure = new PathSin();
-                    break;
-                case Ellipse:
-                    PathFigure = new PathEllipse();
-                    break;
-                case Triangle:
-                    PathFigure = new PathTriangle();
-                    break;
-                case Square:
-                    PathFigure = new PathSquare();
-                    break;
-                case PathTypes.Random:
-                default:
-                    Movement.SelectedItem = Movement.Items[rnd.Next(0, Movement.Items.Count - 1)];
-                    InitPath();
-                    return;
-            }
+            WhichFigureShouldDraw(Movement.SelectedItem as PathTypes?);
+            
+
             PathFigure.init_position = center;
             Direction.Enabled = PathFigure is IDirectionPath;
             MoveType.Enabled = PathFigure is ISmoothingPath;
+            pictureBox1.Enabled = PathFigure is ILocationBox;
+            Ball.Enabled = Ball is IBallCoordinates;
 
             if (PathFigure is IDirectionPath path_)
             {
                 path_.Direction = Direction.Text;
                 path_.Width = pictureBox1.Width;
                 path_.Height = pictureBox1.Height;
+            }
+
+            if (PathFigure is ILocationBox location_)
+            {
+                location_.LocationX = pictureBox1.Location.X;
+                location_.LocationY = pictureBox1.Location.Y;
+            }
+            if (Ball is IBallCoordinates ballCoordinates_)
+            {
+                ballCoordinates_.Top = Ball.Top;
+                ballCoordinates_.Left = Ball.Left;
             }
             PathFigure.Drop();
         }
@@ -184,9 +169,12 @@ namespace EyeRoll
                 {
                     case "smooth":
                         path.Smoothing = 0.05f;
+                        UpdateTimer.Interval = 20;
                         break;
                     case "step":
-                        path.Smoothing = 1;
+                        path.Smoothing = 0.05f;
+                        delay = Step_delay.Value * 1000;
+                        UpdateTimer.Interval = (int)delay;
                         break;
                 }
             }
@@ -207,7 +195,7 @@ namespace EyeRoll
         private void SecTimer_Tick(object sender, EventArgs e)
         {
             Timer.Text = "Time: " + (++simulationTime).ToString();
-            if (simulationTime >= int.Parse(UserUpDownTimer.Text) * 60) StopSimulation();
+            if (simulationTime >= int.Parse(UserUpDownTimer.Text)) StopSimulation();
         }
 
         // render
@@ -244,11 +232,93 @@ namespace EyeRoll
         private void VisibleButton_Click(object sender, EventArgs e) => Tools.Visible = !Tools.Visible;
         private void ForegroundColorButtonClick(object sender, EventArgs e) => Ball.BackColor = (sender as Button).BackColor;
 
+        private void TypeChanged(object sender, EventArgs e)
+        {
+            var temp = (sender as ComboBox);
+            switch (temp.Text)
+            {
+                case "smooth":
+                    label3.Text = "Speed of movement";
+                    Step_delay.Visible = false;
+                    Speed.Visible = true;
+                    break;
+                case "step":
+                    label3.Text = "Step delay, seconds";
+                    Step_delay.Visible = true;
+                    Speed.Visible = false;
+                    break;
+            }
+        }
+
+        private void IsTypeChanged(object sender, EventArgs e)
+        {
+            if (Movement.SelectedItem as PathTypes? == PathTypes.Hopping_dot)
+            {
+                MoveType.Text = "step";
+                MoveType.Items.Remove("smooth");
+            } 
+            else if (!MoveType.Items.Contains("smooth")) MoveType.Items.Add("smooth");
+        }
+
         private void BackgroundColorButtonClick(object sender, EventArgs e)
         {
             BackColor = (sender as Button).BackColor;
             Tools.BackColor = (sender as Button).BackColor;
         }
 
+        private void WhichFigureShouldDraw(PathTypes? val) {
+            switch (val)
+            {
+                case Eight:
+                    PathFigure = new PathEight();
+                    break;
+                case Circle:
+                    PathFigure = new PathCircle();
+                    break;
+                case Infinity:
+                    PathFigure = new PathInfinity();
+                    break;
+                case Ellipse:
+                    PathFigure = new PathEllipse();
+                    break;
+                case Triangle:
+                    PathFigure = new PathTriangle();
+                    break;
+                case Square:
+                    PathFigure = new PathSquare();
+                    break;
+                case Hopping_dot:
+                    PathFigure = new PathHoppingDot();
+                    break;
+                case Line:
+                    PathFigure = new PathLine();
+                    break;
+                case Diagonal:
+                    PathFigure = new PathDiagonal();
+                    break;
+                case Ping_pong:
+                    PathFigure = new PathPing_pong();
+                    break;
+                case PathTypes.Random:
+                    /*Movement.SelectedItem = PathTypes.Random;*/
+/*                    while (SecTimer.Enabled)
+                    {*/
+                        /*times = randomQuantity.Next(1, 5);*/
+                    var randomFigure = Movement.Items[rnd.Next(0, Movement.Items.Count - 2)];
+                        /*Movement.SelectedItem =*/
+                        for (int i = 0; i < 5; i++)
+                        {
+                            WhichFigureShouldDraw(randomFigure as PathTypes?);
+                        }
+                    /*}*/
+                    /*                    */
+                   /* InitPath();*/
+                    break;
+                default:
+                    InitPath();
+                    return;
+            }
+
+        }
     }
 }

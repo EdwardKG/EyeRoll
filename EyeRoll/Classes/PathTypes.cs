@@ -11,11 +11,14 @@ namespace EyeRoll.Classes
         Eight,
         Circle,
         Infinity,
-        Sawtooth,
-        Sin,
+        
         Ellipse,
         Triangle,
         Square,
-        Random
+        Line,
+        Diagonal,
+        Ping_pong,
+        Hopping_dot,
+        Random,
     }
 }

@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,13 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Fields Inherit\IBallCoordinates.cs" />
     <Compile Include="Classes\Fields Inherit\IDirectionPath.cs" />
+    <Compile Include="Classes\Fields Inherit\ILocationBox.cs" />
     <Compile Include="Classes\Fields Inherit\ISmoothingPath.cs" />
+    <Compile Include="Classes\Figures\PathDiagonal.cs" />
+    <Compile Include="Classes\Figures\PathLine.cs" />
     <Compile Include="Classes\Figures\PathEight.cs" />
     <Compile Include="Classes\Figures\PathEllipse.cs" />
+    <Compile Include="Classes\Figures\PathHopingDot.cs" />
     <Compile Include="Classes\Figures\PathInfinity.cs" />
-    <Compile Include="Classes\Figures\PathSawtooth.cs" />
-    <Compile Include="Classes\Figures\PathSin.cs" />
+    <Compile Include="Classes\Figures\PathPing_pong.cs" />
     <Compile Include="Classes\Figures\PathSquare.cs" />
     <Compile Include="Classes\Figures\PathTriangle.cs" />
     <Compile Include="Classes\Path.cs" />
