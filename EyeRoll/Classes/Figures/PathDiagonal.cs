@@ -5,9 +5,9 @@ using EyeRoll.Classes.Fields_Inherit;
 namespace EyeRoll.Classes.Figures
 {
 
-    class PathTriangle : Path, IDirectionPath, ISmoothingPath
+    class PathDiagonal : Path, IDirectionPath, ISmoothingPath
     {
-        private int index = 0, timer = 0;
+        private int index = 2, timer = 0;
         public float Smoothing { get; set; }
         public string Direction { get; set; }
         public int Width { get; set; }
@@ -25,29 +25,49 @@ namespace EyeRoll.Classes.Figures
 
         public override Point Update(int speed)
         {
-            int lengthOfSide = 100;
-            int startX = 400;
+            int startX = 200;
             int startY = 200;
-            int res = 1156 / 681;
+            int lengthOfSide = 100;
+            /*int res = 1156 / 681;*/
             int coefX = 1156 / Width;
             int coefY = 681 / Height;
 
             timer += speed;
 
-            if (index == 0)
-            {
-                velX += 4 * speed;
-                velY += 4 * speed;
+
+            if (Direction == "Horizontal")
+            { 
+                if (index == 0)
+                {
+                    velX += 4 * speed;
+                    velY += 4 * speed;
+                    
+                }
+                else if (index == 1)
+                {
+                    velX -= 4 * speed;
+                    velY -= 4 * speed;
+
+                }
+
             }
-            else if (index == 1)
+            else
             {
-                velX += 4 * speed;
-                velY -= 4 * speed;
+                startY = 200;
+                startX = -225;
+                if (index == 0)
+                {
+                    velX -= 4 * speed;
+                    velY += 4 * speed;
+                }
+                else if (index == 1)
+                {
+                    velX += 4 * speed;
+                    velY -= 4 * speed;
+                }
             }
-            else if (index == 2)
-            {
-                velX -= 4 * speed;
-            }
+            
+/*            }
 
             if (Width / Height < res)
             {
@@ -65,11 +85,11 @@ namespace EyeRoll.Classes.Figures
                     startY /= coefX;
                 }
 
-            }
+            }*/
 
             //681 1156
 
-            else if (Width / Height > res)
+/*            else if (Width / Height > res)
             {
                 if (Width > Height)
                 {
@@ -83,16 +103,15 @@ namespace EyeRoll.Classes.Figures
                     startX *= coefX;
                     startY *= coefX;
                 }
-            }
+            }*/
 
 
-            if (timer > lengthOfSide * 2 && index == 2) Drop();
-            else if (timer > lengthOfSide && index != 2)
+            if (timer > lengthOfSide && index == 1) Drop();
+            else if (timer > lengthOfSide && index != 1)
             {
                 index++;
                 timer = 0;
             }
-            Console.WriteLine(lengthOfSide);
 
             int x = velX + init_position.X - startX;
             int y = velY + init_position.Y - startY;

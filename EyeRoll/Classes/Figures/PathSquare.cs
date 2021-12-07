@@ -3,10 +3,11 @@ using EyeRoll.Classes.Fields_Inherit;
 
 namespace EyeRoll.Classes.Figures
 {
-    class PathSquare : Path, IDirectionPath
+    class PathSquare : Path, IDirectionPath, ISmoothingPath
     {
         private int index = 0, timer = 0;
         public string Direction { get; set; }
+        public float Smoothing { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
 
