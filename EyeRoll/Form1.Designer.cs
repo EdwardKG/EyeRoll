@@ -32,6 +32,7 @@ namespace EyeRoll
             this.components = new System.ComponentModel.Container();
             this.VisibleButton = new System.Windows.Forms.Button();
             this.Tools = new System.Windows.Forms.Panel();
+            this.Speed = new System.Windows.Forms.DomainUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.Width_TextBox = new System.Windows.Forms.TextBox();
             this.Height_TextBox = new System.Windows.Forms.TextBox();
@@ -44,11 +45,10 @@ namespace EyeRoll
             this.StopButton = new System.Windows.Forms.Button();
             this.Start = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.UserUpDownTimer = new System.Windows.Forms.DomainUpDown();
+            this.UserUpDownTimer = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.Size = new System.Windows.Forms.DomainUpDown();
-            this.Speed = new System.Windows.Forms.DomainUpDown();
             this.Movement = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -63,18 +63,22 @@ namespace EyeRoll
             this.Timer = new System.Windows.Forms.Label();
             this.SecTimer = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.Step_delay = new System.Windows.Forms.NumericUpDown();
             this.Tools.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UserUpDownTimer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Ball)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Step_delay)).BeginInit();
             this.SuspendLayout();
             // 
             // VisibleButton
             // 
             this.VisibleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.VisibleButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.VisibleButton.Location = new System.Drawing.Point(939, 11);
+            this.VisibleButton.Location = new System.Drawing.Point(1252, 14);
+            this.VisibleButton.Margin = new System.Windows.Forms.Padding(4);
             this.VisibleButton.Name = "VisibleButton";
-            this.VisibleButton.Size = new System.Drawing.Size(92, 23);
+            this.VisibleButton.Size = new System.Drawing.Size(123, 28);
             this.VisibleButton.TabIndex = 0;
             this.VisibleButton.Text = "visible";
             this.VisibleButton.UseVisualStyleBackColor = true;
@@ -84,6 +88,7 @@ namespace EyeRoll
             // 
             this.Tools.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Tools.BackColor = System.Drawing.SystemColors.Control;
+            this.Tools.Controls.Add(this.Speed);
             this.Tools.Controls.Add(this.label10);
             this.Tools.Controls.Add(this.Width_TextBox);
             this.Tools.Controls.Add(this.Height_TextBox);
@@ -100,7 +105,6 @@ namespace EyeRoll
             this.Tools.Controls.Add(this.label4);
             this.Tools.Controls.Add(this.label3);
             this.Tools.Controls.Add(this.Size);
-            this.Tools.Controls.Add(this.Speed);
             this.Tools.Controls.Add(this.Movement);
             this.Tools.Controls.Add(this.label2);
             this.Tools.Controls.Add(this.label1);
@@ -110,62 +114,76 @@ namespace EyeRoll
             this.Tools.Controls.Add(this.RedButton);
             this.Tools.Controls.Add(this.BlueButton);
             this.Tools.Controls.Add(this.GreenButton);
-            this.Tools.Location = new System.Drawing.Point(939, 40);
+            this.Tools.Controls.Add(this.Step_delay);
+            this.Tools.Location = new System.Drawing.Point(1252, 49);
+            this.Tools.Margin = new System.Windows.Forms.Padding(4);
             this.Tools.Name = "Tools";
-            this.Tools.Size = new System.Drawing.Size(216, 641);
+            this.Tools.Size = new System.Drawing.Size(288, 789);
             this.Tools.TabIndex = 1;
+            // 
+            // Speed
+            // 
+            this.Speed.Items.Add("3");
+            this.Speed.Items.Add("2");
+            this.Speed.Items.Add("1");
+            this.Speed.Location = new System.Drawing.Point(187, 101);
+            this.Speed.Margin = new System.Windows.Forms.Padding(4);
+            this.Speed.Name = "Speed";
+            this.Speed.Size = new System.Drawing.Size(76, 22);
+            this.Speed.TabIndex = 9;
+            this.Speed.Text = "1";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(4, 58);
+            this.label10.Location = new System.Drawing.Point(5, 71);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(31, 13);
+            this.label10.Size = new System.Drawing.Size(40, 17);
             this.label10.TabIndex = 21;
             this.label10.Text = "Type";
             // 
             // Width_TextBox
             // 
-            this.Width_TextBox.Location = new System.Drawing.Point(89, 286);
-            this.Width_TextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.Width_TextBox.Location = new System.Drawing.Point(119, 352);
+            this.Width_TextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Width_TextBox.Name = "Width_TextBox";
-            this.Width_TextBox.Size = new System.Drawing.Size(38, 20);
+            this.Width_TextBox.Size = new System.Drawing.Size(49, 22);
             this.Width_TextBox.TabIndex = 7;
             // 
             // Height_TextBox
             // 
-            this.Height_TextBox.Location = new System.Drawing.Point(89, 316);
-            this.Height_TextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.Height_TextBox.Location = new System.Drawing.Point(119, 389);
+            this.Height_TextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Height_TextBox.Name = "Height_TextBox";
-            this.Height_TextBox.Size = new System.Drawing.Size(38, 20);
+            this.Height_TextBox.Size = new System.Drawing.Size(49, 22);
             this.Height_TextBox.TabIndex = 8;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 289);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Location = new System.Drawing.Point(4, 356);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(76, 13);
+            this.label8.Size = new System.Drawing.Size(102, 17);
             this.label8.TabIndex = 5;
             this.label8.Text = "Horizontal, mm";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 188);
+            this.label7.Location = new System.Drawing.Point(4, 231);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(49, 13);
+            this.label7.Size = new System.Drawing.Size(64, 17);
             this.label7.TabIndex = 20;
             this.label7.Text = "Direction";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 319);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Location = new System.Drawing.Point(4, 393);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(64, 13);
+            this.label9.Size = new System.Drawing.Size(85, 17);
             this.label9.TabIndex = 6;
             this.label9.Text = "Vertical, mm";
             // 
@@ -175,18 +193,20 @@ namespace EyeRoll
             this.Direction.Items.AddRange(new object[] {
             "Horizontal",
             "Vertical"});
-            this.Direction.Location = new System.Drawing.Point(89, 185);
+            this.Direction.Location = new System.Drawing.Point(119, 228);
+            this.Direction.Margin = new System.Windows.Forms.Padding(4);
             this.Direction.Name = "Direction";
-            this.Direction.Size = new System.Drawing.Size(108, 21);
+            this.Direction.Size = new System.Drawing.Size(143, 24);
             this.Direction.TabIndex = 19;
             this.Direction.Text = "Horizontal";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 161);
+            this.label6.Location = new System.Drawing.Point(4, 198);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(80, 13);
+            this.label6.Size = new System.Drawing.Size(104, 17);
             this.label6.TabIndex = 18;
             this.label6.Text = "Movement type";
             // 
@@ -196,18 +216,21 @@ namespace EyeRoll
             this.MoveType.Items.AddRange(new object[] {
             "step",
             "smooth"});
-            this.MoveType.Location = new System.Drawing.Point(89, 158);
+            this.MoveType.Location = new System.Drawing.Point(119, 194);
+            this.MoveType.Margin = new System.Windows.Forms.Padding(4);
             this.MoveType.Name = "MoveType";
-            this.MoveType.Size = new System.Drawing.Size(108, 21);
+            this.MoveType.Size = new System.Drawing.Size(143, 24);
             this.MoveType.TabIndex = 17;
             this.MoveType.Text = "smooth";
+            this.MoveType.TextChanged += new System.EventHandler(this.TypeChanged);
             // 
             // StopButton
             // 
             this.StopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.StopButton.Location = new System.Drawing.Point(5, 574);
+            this.StopButton.Location = new System.Drawing.Point(7, 706);
+            this.StopButton.Margin = new System.Windows.Forms.Padding(4);
             this.StopButton.Name = "StopButton";
-            this.StopButton.Size = new System.Drawing.Size(88, 23);
+            this.StopButton.Size = new System.Drawing.Size(117, 28);
             this.StopButton.TabIndex = 16;
             this.StopButton.Text = "Stop";
             this.StopButton.UseVisualStyleBackColor = true;
@@ -216,9 +239,10 @@ namespace EyeRoll
             // Start
             // 
             this.Start.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Start.Location = new System.Drawing.Point(116, 574);
+            this.Start.Location = new System.Drawing.Point(155, 706);
+            this.Start.Margin = new System.Windows.Forms.Padding(4);
             this.Start.Name = "Start";
-            this.Start.Size = new System.Drawing.Size(97, 23);
+            this.Start.Size = new System.Drawing.Size(129, 28);
             this.Start.TabIndex = 15;
             this.Start.Text = "Start";
             this.Start.UseVisualStyleBackColor = true;
@@ -227,50 +251,53 @@ namespace EyeRoll
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 134);
+            this.label5.Location = new System.Drawing.Point(4, 165);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 13);
+            this.label5.Size = new System.Drawing.Size(74, 17);
             this.label5.TabIndex = 14;
             this.label5.Text = "Timer, min";
             // 
             // UserUpDownTimer
             // 
-            this.UserUpDownTimer.Items.Add("15");
-            this.UserUpDownTimer.Items.Add("14");
-            this.UserUpDownTimer.Items.Add("13");
-            this.UserUpDownTimer.Items.Add("12");
-            this.UserUpDownTimer.Items.Add("11");
-            this.UserUpDownTimer.Items.Add("10");
-            this.UserUpDownTimer.Items.Add("9");
-            this.UserUpDownTimer.Items.Add("8");
-            this.UserUpDownTimer.Items.Add("7");
-            this.UserUpDownTimer.Items.Add("6");
-            this.UserUpDownTimer.Items.Add("5");
-            this.UserUpDownTimer.Items.Add("4");
-            this.UserUpDownTimer.Items.Add("3");
-            this.UserUpDownTimer.Items.Add("2");
-            this.UserUpDownTimer.Items.Add("1");
-            this.UserUpDownTimer.Location = new System.Drawing.Point(140, 132);
+            this.UserUpDownTimer.Location = new System.Drawing.Point(183, 165);
+            this.UserUpDownTimer.Margin = new System.Windows.Forms.Padding(4);
+            this.UserUpDownTimer.Maximum = new decimal(new int[] {
+            900,
+            0,
+            0,
+            0});
+            this.UserUpDownTimer.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.UserUpDownTimer.Name = "UserUpDownTimer";
-            this.UserUpDownTimer.Size = new System.Drawing.Size(57, 20);
-            this.UserUpDownTimer.TabIndex = 13;
-            this.UserUpDownTimer.Text = "1";
+            this.UserUpDownTimer.Size = new System.Drawing.Size(80, 22);
+            this.UserUpDownTimer.TabIndex = 22;
+            this.UserUpDownTimer.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 110);
+            this.label4.Location = new System.Drawing.Point(4, 135);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 13);
+            this.label4.Size = new System.Drawing.Size(72, 17);
             this.label4.TabIndex = 12;
             this.label4.Text = "Circle size";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 84);
+            this.label3.Location = new System.Drawing.Point(4, 103);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(102, 13);
+            this.label3.Size = new System.Drawing.Size(134, 17);
             this.label3.TabIndex = 11;
             this.label3.Text = "Speed of movement";
             // 
@@ -286,48 +313,42 @@ namespace EyeRoll
             this.Size.Items.Add("3");
             this.Size.Items.Add("2");
             this.Size.Items.Add("1");
-            this.Size.Location = new System.Drawing.Point(140, 108);
+            this.Size.Location = new System.Drawing.Point(187, 133);
+            this.Size.Margin = new System.Windows.Forms.Padding(4);
             this.Size.Name = "Size";
-            this.Size.Size = new System.Drawing.Size(57, 20);
+            this.Size.Size = new System.Drawing.Size(76, 22);
             this.Size.TabIndex = 10;
             this.Size.Text = "1";
             this.Size.SelectedItemChanged += new System.EventHandler(this.Size_SelectedItemChanged);
             // 
-            // Speed
-            // 
-            this.Speed.Items.Add("3");
-            this.Speed.Items.Add("2");
-            this.Speed.Items.Add("1");
-            this.Speed.Location = new System.Drawing.Point(140, 82);
-            this.Speed.Name = "Speed";
-            this.Speed.Size = new System.Drawing.Size(57, 20);
-            this.Speed.TabIndex = 9;
-            this.Speed.Text = "1";
-            // 
             // Movement
             // 
             this.Movement.FormattingEnabled = true;
-            this.Movement.Location = new System.Drawing.Point(89, 55);
+            this.Movement.Location = new System.Drawing.Point(119, 68);
+            this.Movement.Margin = new System.Windows.Forms.Padding(4);
             this.Movement.Name = "Movement";
-            this.Movement.Size = new System.Drawing.Size(108, 21);
+            this.Movement.Size = new System.Drawing.Size(143, 24);
             this.Movement.TabIndex = 8;
             this.Movement.Text = "Circle";
+            this.Movement.TextChanged += new System.EventHandler(this.IsTypeChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 33);
+            this.label2.Location = new System.Drawing.Point(4, 41);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 13);
+            this.label2.Size = new System.Drawing.Size(119, 17);
             this.label2.TabIndex = 7;
             this.label2.Text = "Background color";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 10);
+            this.label1.Location = new System.Drawing.Point(4, 12);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 13);
+            this.label1.Size = new System.Drawing.Size(78, 17);
             this.label1.TabIndex = 6;
             this.label1.Text = "Circle color";
             // 
@@ -336,9 +357,10 @@ namespace EyeRoll
             this.BackColor1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BackColor1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.BackColor1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.BackColor1.Location = new System.Drawing.Point(142, 29);
+            this.BackColor1.Location = new System.Drawing.Point(189, 36);
+            this.BackColor1.Margin = new System.Windows.Forms.Padding(4);
             this.BackColor1.Name = "BackColor1";
-            this.BackColor1.Size = new System.Drawing.Size(20, 20);
+            this.BackColor1.Size = new System.Drawing.Size(27, 25);
             this.BackColor1.TabIndex = 5;
             this.BackColor1.UseVisualStyleBackColor = false;
             this.BackColor1.Click += new System.EventHandler(this.BackgroundColorButtonClick);
@@ -348,9 +370,10 @@ namespace EyeRoll
             this.BackColor2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BackColor2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.BackColor2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.BackColor2.Location = new System.Drawing.Point(167, 29);
+            this.BackColor2.Location = new System.Drawing.Point(223, 36);
+            this.BackColor2.Margin = new System.Windows.Forms.Padding(4);
             this.BackColor2.Name = "BackColor2";
-            this.BackColor2.Size = new System.Drawing.Size(20, 20);
+            this.BackColor2.Size = new System.Drawing.Size(27, 25);
             this.BackColor2.TabIndex = 4;
             this.BackColor2.UseVisualStyleBackColor = false;
             this.BackColor2.Click += new System.EventHandler(this.BackgroundColorButtonClick);
@@ -360,9 +383,10 @@ namespace EyeRoll
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(209)))), ((int)(((byte)(220)))));
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button4.Location = new System.Drawing.Point(193, 29);
+            this.button4.Location = new System.Drawing.Point(257, 36);
+            this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(20, 20);
+            this.button4.Size = new System.Drawing.Size(27, 25);
             this.button4.TabIndex = 3;
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.BackgroundColorButtonClick);
@@ -372,9 +396,10 @@ namespace EyeRoll
             this.RedButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.RedButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.RedButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.RedButton.Location = new System.Drawing.Point(142, 3);
+            this.RedButton.Location = new System.Drawing.Point(189, 4);
+            this.RedButton.Margin = new System.Windows.Forms.Padding(4);
             this.RedButton.Name = "RedButton";
-            this.RedButton.Size = new System.Drawing.Size(20, 20);
+            this.RedButton.Size = new System.Drawing.Size(27, 25);
             this.RedButton.TabIndex = 2;
             this.RedButton.UseVisualStyleBackColor = false;
             this.RedButton.Click += new System.EventHandler(this.ForegroundColorButtonClick);
@@ -384,9 +409,10 @@ namespace EyeRoll
             this.BlueButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BlueButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(51)))), ((int)(((byte)(153)))));
             this.BlueButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.BlueButton.Location = new System.Drawing.Point(167, 3);
+            this.BlueButton.Location = new System.Drawing.Point(223, 4);
+            this.BlueButton.Margin = new System.Windows.Forms.Padding(4);
             this.BlueButton.Name = "BlueButton";
-            this.BlueButton.Size = new System.Drawing.Size(20, 20);
+            this.BlueButton.Size = new System.Drawing.Size(27, 25);
             this.BlueButton.TabIndex = 1;
             this.BlueButton.UseVisualStyleBackColor = false;
             this.BlueButton.Click += new System.EventHandler(this.ForegroundColorButtonClick);
@@ -396,9 +422,10 @@ namespace EyeRoll
             this.GreenButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.GreenButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(102)))), ((int)(((byte)(51)))));
             this.GreenButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.GreenButton.Location = new System.Drawing.Point(193, 3);
+            this.GreenButton.Location = new System.Drawing.Point(257, 4);
+            this.GreenButton.Margin = new System.Windows.Forms.Padding(4);
             this.GreenButton.Name = "GreenButton";
-            this.GreenButton.Size = new System.Drawing.Size(20, 20);
+            this.GreenButton.Size = new System.Drawing.Size(27, 25);
             this.GreenButton.TabIndex = 0;
             this.GreenButton.UseVisualStyleBackColor = false;
             this.GreenButton.Click += new System.EventHandler(this.ForegroundColorButtonClick);
@@ -409,9 +436,10 @@ namespace EyeRoll
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Ball.BackColor = System.Drawing.Color.Black;
-            this.Ball.Location = new System.Drawing.Point(332, 225);
+            this.Ball.Location = new System.Drawing.Point(443, 277);
+            this.Ball.Margin = new System.Windows.Forms.Padding(4);
             this.Ball.Name = "Ball";
-            this.Ball.Size = new System.Drawing.Size(15, 15);
+            this.Ball.Size = new System.Drawing.Size(20, 18);
             this.Ball.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.Ball.TabIndex = 2;
             this.Ball.TabStop = false;
@@ -425,9 +453,10 @@ namespace EyeRoll
             // 
             this.Timer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Timer.AutoSize = true;
-            this.Timer.Location = new System.Drawing.Point(1078, 15);
+            this.Timer.Location = new System.Drawing.Point(1437, 18);
+            this.Timer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Timer.Name = "Timer";
-            this.Timer.Size = new System.Drawing.Size(30, 13);
+            this.Timer.Size = new System.Drawing.Size(39, 17);
             this.Timer.TabIndex = 3;
             this.Timer.Text = "Time";
             // 
@@ -441,32 +470,63 @@ namespace EyeRoll
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1156, 681);
+            this.pictureBox1.Size = new System.Drawing.Size(1540, 837);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
+            // Step_delay
+            // 
+            this.Step_delay.DecimalPlaces = 1;
+            this.Step_delay.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.Step_delay.Location = new System.Drawing.Point(187, 101);
+            this.Step_delay.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.Step_delay.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.Step_delay.Name = "Step_delay";
+            this.Step_delay.Size = new System.Drawing.Size(75, 22);
+            this.Step_delay.TabIndex = 23;
+            this.Step_delay.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1155, 681);
+            this.ClientSize = new System.Drawing.Size(1540, 838);
             this.Controls.Add(this.Ball);
             this.Controls.Add(this.Tools);
             this.Controls.Add(this.VisibleButton);
             this.Controls.Add(this.Timer);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.Text = "Eye roll";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.Tools.ResumeLayout(false);
             this.Tools.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UserUpDownTimer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Ball)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Step_delay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -491,7 +551,6 @@ namespace EyeRoll
         private System.Windows.Forms.DomainUpDown Speed;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DomainUpDown UserUpDownTimer;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button Start;
         private System.Windows.Forms.Button StopButton;
@@ -507,6 +566,8 @@ namespace EyeRoll
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown UserUpDownTimer;
+        private System.Windows.Forms.NumericUpDown Step_delay;
     }
 }
 

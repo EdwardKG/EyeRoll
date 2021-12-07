@@ -173,7 +173,7 @@ namespace EyeRoll
                         break;
                     case "step":
                         path.Smoothing = 0.05f;
-                        /*delay = Step_delay.Value * 1000;*/
+                        delay = Step_delay.Value * 1000;
                         UpdateTimer.Interval = (int)delay;
                         break;
                 }
@@ -239,12 +239,12 @@ namespace EyeRoll
             {
                 case "smooth":
                     label3.Text = "Speed of movement";
-                    /*Step_delay.Visible = false;*/
+                    Step_delay.Visible = false;
                     Speed.Visible = true;
                     break;
                 case "step":
                     label3.Text = "Step delay, seconds";
-                    /*Step_delay.Visible = true;*/
+                    Step_delay.Visible = true;
                     Speed.Visible = false;
                     break;
             }

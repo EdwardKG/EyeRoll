@@ -11,7 +11,6 @@ namespace EyeRoll.Classes
         Eight,
         Circle,
         Infinity,
-        
         Ellipse,
         Triangle,
         Square,
